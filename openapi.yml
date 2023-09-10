@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  title: User API
+  version: 1.0.0
+paths:
+  /api/users:
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: User's first name (required)
+                last_name:
+                  type: string
+                  description: User's last name (required)
+                date_of_birth:
+                  type: string
+                  format: date
+                  description: User's date of birth (required)
+                email:
+                  type: string
+                  format: email
+                  description: User's email address (required, unique)
+                location:
+                  type: string
+                  description: User's location (required, specify a valid location as a string)
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request, validation failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+    put:
+      summary: Update a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: User ID (required)
+                  example: 1
+                first_name:
+                  type: string
+                  description: New first name
+                last_name:
+                  type: string
+                  description: New last name
+                date_of_birth:
+                  type: string
+                  format: date
+                  description: New date of birth
+                location:
+                  type: string
+                  description: New location (specify a valid location as a string)
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request, validation failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      summary: Delete a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: User ID (required)
+                  example: 1
+      responses:
+        '200':
+          description: User deleted successfully
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: User ID
+          example: 1
+        first_name:
+          type: string
+          description: User's first name
+        last_name:
+          type: string
+          description: User's last name
+        date_of_birth:
+          type: string
+          format: date
+          description: User's date of birth
+        email:
+          type: string
+          format: email
+          description: User's email address
+        location:
+          type: string
+          description: User's location (string)
