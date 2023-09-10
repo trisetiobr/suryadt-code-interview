@@ -18,7 +18,7 @@ php artisan db:seed
 ## TESTING
 - running unit test
 ```
-php artisan test --database=sqlite_test
+php artisan test
 ``````
 - sending email birthday you can run manually
 ```
