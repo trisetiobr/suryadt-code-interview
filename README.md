@@ -15,6 +15,9 @@ php artisan db:seed
 * * * * * cd /path-to-your-laravel-project && php artisan schedule:run >> /dev/null 2>&1
 ```
 
+## THE API DOCS Can be found
+- openapi.yml
+
 ## TESTING
 - running unit test
 ```
